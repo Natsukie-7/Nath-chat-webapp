@@ -1,8 +1,6 @@
-/* @refresh reload */
-import { render } from 'solid-js/web'
-import './index.css'
-import App from './App'
+import { render } from "solid-js/web";
+import WebApplication from "./webApplication/WebApplication";
 
-const root = document.getElementById('root')
+const root = document.getElementById("root");
 
-render(() => <App />, root!)
+render(() => <WebApplication />, root!);
