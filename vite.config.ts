@@ -13,6 +13,7 @@ export default defineConfig({
     alias: {
       "@tools": path.resolve(__dirname, "src/tools"),
       "@templates": path.resolve(__dirname, "src/templates"),
+      "@pages": path.resolve(__dirname, "src/pages"),
     },
   },
 });

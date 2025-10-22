@@ -21,7 +21,8 @@
     /* Alias */
     "paths": {
       "@tools/*": ["./src/tools/*"],
-      "@templates/*": ["./src/templates/*"]
+      "@templates/*": ["./src/templates/*"],
+      "@pages/*": ["./src/pages/*"]
     },
 
     /* Linting */
