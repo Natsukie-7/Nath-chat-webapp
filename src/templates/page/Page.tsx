@@ -1,31 +1,34 @@
-import { type Component } from "solid-js";
-import { PageContextProvider, usePageContext } from "./Page.context";
+import { useNavigate } from "@solidjs/router";
+import { createEffectOn } from "@tools/createEffectOn";
+import { createResource, Show, type ParentComponent } from "solid-js";
+import { PageContextProvider } from "./Page.context";
+import { fetchUser } from "./page.tools";
 
-interface PageProps {}
+const Page: ParentComponent = (props) => {
+  const [user] = createResource(fetchUser);
 
-const Page: Component<PageProps> = (props) => {
-  return (
-    <PageContextProvider>
-      <Other />
-    </PageContextProvider>
+  const navigate = useNavigate();
+
+  createEffectOn(
+    () => user(),
+    (userData) => {
+      if (userData) {
+        return;
+      }
+
+      navigate("/login", { replace: true });
+    },
+    { defer: true }
   );
-};
-
-const Other = () => {
-  const [state, { set }] = usePageContext();
 
   return (
-    <>
-      {state.name}
-
-      <button
-        onClick={() => {
-          set("name", (prev) => prev + 1);
-        }}
-      >
-        Click
-      </button>
-    </>
+    <Show when={user()} keyed>
+      {(userData) => (
+        <PageContextProvider user={userData}>
+          {props.children}
+        </PageContextProvider>
+      )}
+    </Show>
   );
 };
 

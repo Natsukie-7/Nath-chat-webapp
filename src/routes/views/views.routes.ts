@@ -5,6 +5,7 @@ const viewRoutes: RouteDefinition[] = [
   {
     path: "",
     component: lazy(() => import("@templates/page/Page")),
+    children: [{ path: "/home" }],
   },
 ];
 
