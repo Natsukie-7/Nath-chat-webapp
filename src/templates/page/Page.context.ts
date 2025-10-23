@@ -1,4 +1,4 @@
-import createContextProvider from "@tools/createContextProvider";
+import createContextProvider from "@tools/context/createContextProvider";
 
 interface PageProps {
   user: User;
