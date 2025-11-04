@@ -10,10 +10,22 @@ export const Wrapper = styled("div")`
   padding: 3rem;
 `;
 
-export const Content = styled("section")``;
+export const Content = styled("section")`
+  max-width: 20rem;
+  width: 100%;
+
+  display: grid;
+  row-gap: 1rem;
+`;
 
 export const Title = styled("h1")`
   font-size: 2.5rem;
+`;
+
+export const Footer = styled("footer")`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const SubmitButton = styled(Button)`
@@ -21,4 +33,6 @@ export const SubmitButton = styled(Button)`
   border-radius: 2rem;
   width: 6rem;
   height: 2.5rem;
+
+  justify-self: flex-end;
 `;

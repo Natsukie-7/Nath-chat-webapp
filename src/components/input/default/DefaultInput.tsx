@@ -11,7 +11,7 @@ import {
   type ComponentProps,
   type JSX,
 } from "solid-js";
-import { Label, StyledInput } from "./DefaultInput.styled";
+import { InputWrapper, Label, StyledInput } from "./DefaultInput.styled";
 
 export type InputChangeEvent = (
   value: string,
@@ -74,7 +74,7 @@ const DefaultInput: Component<DefaultInputProps> = (props) => {
   };
 
   return (
-    <>
+    <InputWrapper>
       <Show when={local.label}>
         <Label for={inputProps.id}>{local.label}</Label>
       </Show>
@@ -85,7 +85,7 @@ const DefaultInput: Component<DefaultInputProps> = (props) => {
         onInput={onInput}
         ref={inputMounted}
       />
-    </>
+    </InputWrapper>
   );
 };
 

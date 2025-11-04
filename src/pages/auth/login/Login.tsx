@@ -1,6 +1,7 @@
 import Input from "@components/input";
+import { A } from "@solidjs/router";
 import { type Component } from "solid-js";
-import { Content, SubmitButton, Title, Wrapper } from "./Login.styled";
+import { Content, Footer, SubmitButton, Title, Wrapper } from "./Login.styled";
 
 interface LoginProps {}
 
@@ -13,7 +14,10 @@ const Login: Component<LoginProps> = (props) => {
         <Input.Email label="E-mail" placeholder="exemplo@gmail.com" />
         <Input label="Senha" placeholder="*******" />
 
-        <SubmitButton variant="form-action">Acessar</SubmitButton>
+        <Footer>
+          <A href="/register">Realizar registro</A>
+          <SubmitButton variant="form-action">Acessar</SubmitButton>
+        </Footer>
       </Content>
     </Wrapper>
   );
