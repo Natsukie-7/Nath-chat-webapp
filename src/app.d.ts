@@ -9,6 +9,9 @@ interface SystemThemeTemplate {
   menuColor: string;
   menuHoverColor: string;
   menuBorderColor: string;
+
+  actionButtonBackgroundColor: string;
+  actionButtonTextColor: string;
 }
 
 type SystemKeysThemes = keyof SystemThemeTemplate;

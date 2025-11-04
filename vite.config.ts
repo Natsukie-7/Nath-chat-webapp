@@ -14,6 +14,7 @@ export default defineConfig({
       "@tools": path.resolve(__dirname, "src/tools"),
       "@templates": path.resolve(__dirname, "src/templates"),
       "@pages": path.resolve(__dirname, "src/pages"),
+      "@components": path.resolve(__dirname, "src/components"),
     },
   },
 });

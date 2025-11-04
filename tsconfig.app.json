@@ -22,7 +22,8 @@
     "paths": {
       "@tools/*": ["./src/tools/*"],
       "@templates/*": ["./src/templates/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@components/*": ["./src/components/*"]
     },
 
     /* Linting */

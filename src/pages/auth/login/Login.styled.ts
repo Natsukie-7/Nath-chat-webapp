@@ -1,3 +1,4 @@
+import Button from "@components/button/default/Button";
 import { styled } from "solid-styled-components";
 
 export const Wrapper = styled("div")`
@@ -5,8 +6,17 @@ export const Wrapper = styled("div")`
   height: 100%;
   align-content: center;
   justify-items: center;
+
+  padding: 3rem;
 `;
 
 export const Content = styled("section")``;
 
 export const Title = styled("h1")``;
+
+export const SubmitButton = styled(Button)`
+  padding: 0.25rem 0.5rem;
+  border-radius: 2rem;
+  width: 6rem;
+  height: 2.5rem;
+`;
