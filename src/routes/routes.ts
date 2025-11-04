@@ -1,7 +1,13 @@
 import type { RouteDefinition } from "@solidjs/router";
-import authRoutes from "./auth/auth.routes";
-import viewRoutes from "./views/views.routes";
+import { lazy } from "solid-js";
+import pagesRoutes from "./pagesRoutes/pagesRoutes";
 
-const routes: RouteDefinition[] = [...viewRoutes, ...authRoutes];
+const routes: RouteDefinition[] = [
+  {
+    path: "",
+    component: lazy(() => import("@templates/page/Page")),
+    children: pagesRoutes,
+  },
+];
 
 export default routes;

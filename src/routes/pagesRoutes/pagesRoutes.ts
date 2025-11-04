@@ -1,10 +1,11 @@
 import type { RouteDefinition } from "@solidjs/router";
 import { lazy } from "solid-js";
 
-const authRoutes: RouteDefinition[] = [
+const pagesRoutes: RouteDefinition[] = [
+  { path: "/home" },
   { path: "/login", component: lazy(() => import("@pages/auth/login/Login")) },
   { path: "/register" },
   { path: "/logout" },
 ];
 
-export default authRoutes;
+export default pagesRoutes;

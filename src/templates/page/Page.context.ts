@@ -1,7 +1,7 @@
 import createContextProvider from "@tools/context/createContextProvider";
 
 interface PageProps {
-  user: User;
+  user?: User;
 }
 
 const factory = (props: PageProps) => {
