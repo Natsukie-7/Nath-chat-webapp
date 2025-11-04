@@ -11,6 +11,8 @@ export const PageStyle = createGlobalStyles`
         height:100%;
         width: 100%;
         position:relative;
+
+        font-family: "Asap", sans-serif;
     }
 
     body {

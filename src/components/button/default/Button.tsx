@@ -12,14 +12,14 @@ import { StyledButton } from "./Button.styled";
 
 export type ButtonVariant = "custom" | "form-action";
 
-export type HandleClickEvent = (
+export type ButtonClickEvent = (
   utils: { finish: () => void; loading: () => void },
-  event: MouseEvent,
+  event: EventHandler<HTMLButtonElement, MouseEvent>,
   settings: { isLoading: Accessor<boolean> }
 ) => void | Promise<void>;
 
 interface ButtonProps extends ComponentProps<"button"> {
-  handleClick?: HandleClickEvent;
+  handleClick?: ButtonClickEvent;
   variant?: ButtonVariant;
 }
 

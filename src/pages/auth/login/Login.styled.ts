@@ -1,4 +1,4 @@
-import Button from "@components/button/default/Button";
+import Button from "@components/button";
 import { styled } from "solid-styled-components";
 
 export const Wrapper = styled("div")`
@@ -12,7 +12,9 @@ export const Wrapper = styled("div")`
 
 export const Content = styled("section")``;
 
-export const Title = styled("h1")``;
+export const Title = styled("h1")`
+  font-size: 2.5rem;
+`;
 
 export const SubmitButton = styled(Button)`
   padding: 0.25rem 0.5rem;

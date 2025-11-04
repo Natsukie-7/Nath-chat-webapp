@@ -15,3 +15,8 @@ interface SystemThemeTemplate {
 }
 
 type SystemKeysThemes = keyof SystemThemeTemplate;
+
+type EventHandler<Target, Event extends event> = Event & {
+  currentTarget: Target;
+  target: DOMElement;
+};

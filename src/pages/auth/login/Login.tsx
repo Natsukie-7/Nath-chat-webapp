@@ -1,3 +1,4 @@
+import Input from "@components/input";
 import { type Component } from "solid-js";
 import { Content, SubmitButton, Title, Wrapper } from "./Login.styled";
 
@@ -9,8 +10,9 @@ const Login: Component<LoginProps> = (props) => {
       <Content>
         <Title>Login</Title>
 
-        <input />
-        <input />
+        <Input.Email label="E-mail" placeholder="exemplo@gmail.com" />
+        <Input label="Senha" placeholder="*******" />
+
         <SubmitButton variant="form-action">Acessar</SubmitButton>
       </Content>
     </Wrapper>
