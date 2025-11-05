@@ -8,12 +8,14 @@ interface PasswordContextState {
   encriptaded: boolean;
 }
 const DefaultPasswordState = {
-  togglerEnabled: false,
+  togglerEnabled: true,
   encriptaded: true,
 };
 
-export const PasswordContextFactory = () => {
-  const [state, set] = createStore<PasswordContextState>(DefaultPasswordState);
+export const PasswordContextFactory = (props: PasswordContextState) => {
+  const [state, set] = createStore<PasswordContextState>(
+    mergeProps(DefaultPasswordState, props)
+  );
 
   const Api = { set };
 

@@ -19,6 +19,7 @@ export const StyledInput = styled("input")`
   font-family: inherit;
   font-size: inherit;
 `;
+
 export const Label = styled("label")`
   font-family: inherit;
   font-size: inherit;

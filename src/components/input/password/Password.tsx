@@ -31,9 +31,11 @@ const Password: Component<PasswordProps> = (props) => {
 
       <InputPasswordWrapper>
         <DefaultInput standalone {...passwordProps} type={inputType()} />
-        <Button handleClick={handleEncriptChange}>
-          <CurrentSwitchIcon />
-        </Button>
+        <Show when={state.togglerEnabled}>
+          <Button handleClick={handleEncriptChange}>
+            <CurrentSwitchIcon />
+          </Button>
+        </Show>
       </InputPasswordWrapper>
     </InputWrapper>
   );
