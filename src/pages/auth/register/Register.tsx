@@ -1,24 +1,27 @@
 import Input, { PasswordContextProvider } from "@components/input";
+import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import { type Component } from "solid-js";
-import getRegsiterPageTranslator from "./Register.lang";
+import getRegisterPageTranslator from "./Register.lang";
 import {
   Content,
   Footer,
+  Title as PageTitle,
   SubmitButton,
-  Title,
   Wrapper,
 } from "./Register.styled";
 
-interface RegsiterProps {}
+interface RegisterProps {}
 
-const Regsiter: Component<RegsiterProps> = (props) => {
-  const t = getRegsiterPageTranslator();
+const Register: Component<RegisterProps> = (props) => {
+  const t = getRegisterPageTranslator();
 
   return (
     <Wrapper>
+      <Title>Registro</Title>
+
       <Content>
-        <Title>{t("title")}</Title>
+        <PageTitle>{t("title")}</PageTitle>
 
         <Input label="Nome" />
 
@@ -38,4 +41,4 @@ const Regsiter: Component<RegsiterProps> = (props) => {
   );
 };
 
-export default Regsiter;
+export default Register;

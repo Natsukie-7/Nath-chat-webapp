@@ -1,17 +1,16 @@
+import type { RouteDefinition } from "@solidjs/router";
 import { lazy } from "solid-js";
-import type { AppRouteDefinition } from "../routes.type";
 
-const pagesRoutes: AppRouteDefinition[] = [
+const pagesRoutes: RouteDefinition[] = [
   { path: "/home" },
   {
     path: "/login",
     component: lazy(() => import("@pages/auth/login/Login")),
-    title: "Login",
+    title: "teste02",
   },
   {
     path: "/register",
     component: lazy(() => import("@pages/auth/register/Register")),
-    title: "Login",
   },
   { path: "/logout" },
 ];
