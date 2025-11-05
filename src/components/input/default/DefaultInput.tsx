@@ -1,16 +1,19 @@
 import { createEffectOn } from "@tools/createEffectOn";
 import {
   createUniqueId,
+  Match,
   mergeProps,
   onMount,
   Show,
   splitProps,
+  Switch,
   untrack,
   type Accessor,
   type Component,
   type ComponentProps,
   type JSX,
 } from "solid-js";
+import { Dynamic } from "solid-js/web";
 import { InputWrapper, Label, StyledInput } from "./DefaultInput.styled";
 
 export type InputChangeEvent = (
@@ -24,6 +27,7 @@ export interface DefaultInputProps
   label?: string;
   value?: Accessor<string>;
   initialValue?: string;
+  standalone?: boolean;
 }
 
 const DefaultInput: Component<DefaultInputProps> = (props) => {
@@ -31,6 +35,7 @@ const DefaultInput: Component<DefaultInputProps> = (props) => {
     id: `input-identifier-${createUniqueId()}`,
     handleChange: () => {},
     value: () => "",
+    standalone: false,
   };
 
   const merged = mergeProps(defaultProps, props, {
@@ -42,6 +47,8 @@ const DefaultInput: Component<DefaultInputProps> = (props) => {
     "handleChange",
     "label",
     "initialValue",
+    "children",
+    "standalone",
   ]);
 
   const onInput: JSX.InputEventHandler<HTMLInputElement, InputEvent> = async (
@@ -73,19 +80,47 @@ const DefaultInput: Component<DefaultInputProps> = (props) => {
     });
   };
 
-  return (
-    <InputWrapper>
-      <Show when={local.label}>
-        <Label for={inputProps.id}>{local.label}</Label>
-      </Show>
+  const InputElement = () =>
+    Dynamic({
+      ...inputProps,
+      component: StyledInput,
+      onInput,
+      ref: inputMounted,
+      get value() {
+        switch (typeof inputProps.value) {
+          case "function": {
+            return inputProps.value();
+            break;
+          }
 
-      <StyledInput
-        {...inputProps}
-        value={inputProps.value?.()}
-        onInput={onInput}
-        ref={inputMounted}
-      />
-    </InputWrapper>
+          case "string": {
+            return inputProps.value;
+            break;
+          }
+
+          default: {
+            return undefined;
+          }
+        }
+      },
+    });
+
+  return (
+    <Switch>
+      <Match when={!local.standalone}>
+        <InputWrapper>
+          <Show when={local.label}>
+            <Label for={inputProps.id}>{local.label}</Label>
+          </Show>
+
+          <InputElement />
+        </InputWrapper>
+      </Match>
+
+      <Match when={local.standalone}>
+        <InputElement />
+      </Match>
+    </Switch>
   );
 };
 
