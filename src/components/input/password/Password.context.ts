@@ -3,17 +3,23 @@ import { createMemo, mergeProps, type ComponentProps } from "solid-js";
 import { createStore } from "solid-js/store";
 import { Dynamic } from "solid-js/web";
 import { CleanedIcon, EncriptedIcon } from "./Password.styled";
+
+type Required<T> = {
+  [K in keyof T]-?: T[K];
+};
+
 interface PasswordContextState {
-  togglerEnabled: boolean;
-  encriptaded: boolean;
+  togglerEnabled?: boolean;
+  encriptaded?: boolean;
 }
+
 const DefaultPasswordState = {
   togglerEnabled: true,
   encriptaded: true,
 };
 
 export const PasswordContextFactory = (props: PasswordContextState) => {
-  const [state, set] = createStore<PasswordContextState>(
+  const [state, set] = createStore<Required<PasswordContextState>>(
     mergeProps(DefaultPasswordState, props)
   );
 
