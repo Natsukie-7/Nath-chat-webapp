@@ -1,4 +1,5 @@
 import {
+  createComponent,
   createContext,
   createMemo,
   splitProps,
@@ -17,11 +18,14 @@ export default function createContextProvider<ContextValue, Props = unknown>(
 
     const contextValue = createMemo(() => callback(props as Props));
 
-    return (
-      <Context.Provider value={contextValue()}>
-        {local.children}
-      </Context.Provider>
-    );
+    return createComponent(Context.Provider, {
+      get value() {
+        return contextValue();
+      },
+      get children() {
+        return local.children;
+      },
+    });
   };
 
   const useContextValue = () => {

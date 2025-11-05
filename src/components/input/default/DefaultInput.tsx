@@ -1,5 +1,6 @@
 import { createEffectOn } from "@tools/createEffectOn";
 import {
+  createComponent,
   createUniqueId,
   Match,
   mergeProps,
@@ -8,12 +9,10 @@ import {
   splitProps,
   Switch,
   untrack,
-  type Accessor,
   type Component,
   type ComponentProps,
   type JSX,
 } from "solid-js";
-import { Dynamic } from "solid-js/web";
 import { InputWrapper, Label, StyledInput } from "./DefaultInput.styled";
 
 export type InputChangeEvent = (
@@ -21,11 +20,9 @@ export type InputChangeEvent = (
   event: InputEvent & { currentTarget: HTMLInputElement }
 ) => void | Promise<void>;
 
-export interface DefaultInputProps
-  extends Omit<ComponentProps<"input">, "value"> {
+export interface DefaultInputProps extends ComponentProps<"input"> {
   handleChange?: InputChangeEvent;
   label?: string;
-  value?: Accessor<string>;
   initialValue?: string;
   standalone?: boolean;
 }
@@ -34,7 +31,6 @@ const DefaultInput: Component<DefaultInputProps> = (props) => {
   const defaultProps: DefaultInputProps = {
     id: `input-identifier-${createUniqueId()}`,
     handleChange: () => {},
-    value: () => "",
     standalone: false,
   };
 
@@ -66,9 +62,14 @@ const DefaultInput: Component<DefaultInputProps> = (props) => {
       inputProps.ref(ref);
     }
 
-    createEffectOn(inputProps.value as Accessor<string>, () => {
-      ref.dispatchEvent(fakeEvent);
-    });
+    if (inputProps.value) {
+      createEffectOn(
+        () => inputProps.value,
+        () => {
+          ref.dispatchEvent(fakeEvent);
+        }
+      );
+    }
 
     onMount(() => {
       if (!local.initialValue) {
@@ -81,29 +82,16 @@ const DefaultInput: Component<DefaultInputProps> = (props) => {
   };
 
   const InputElement = () =>
-    Dynamic({
-      ...inputProps,
-      component: StyledInput,
-      onInput,
-      ref: inputMounted,
-      get value() {
-        switch (typeof inputProps.value) {
-          case "function": {
-            return inputProps.value();
-            break;
-          }
-
-          case "string": {
-            return inputProps.value;
-            break;
-          }
-
-          default: {
-            return undefined;
-          }
-        }
-      },
-    });
+    createComponent(
+      StyledInput,
+      mergeProps(
+        {
+          onInput,
+          ref: inputMounted,
+        } as any,
+        inputProps
+      )
+    );
 
   return (
     <Switch>

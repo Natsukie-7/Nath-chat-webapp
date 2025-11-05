@@ -1,4 +1,5 @@
 import Input from "@components/input";
+import { PasswordContextProvider } from "@components/input/password/Password.context";
 import { A } from "@solidjs/router";
 import { type Component } from "solid-js";
 import { Content, Footer, SubmitButton, Title, Wrapper } from "./Login.styled";
@@ -15,7 +16,10 @@ const Login: Component<LoginProps> = (props) => {
         <Title>{t("title")}</Title>
 
         <Input.Email label={t("email")} placeholder="exemplo@gmail.com" />
-        <Input.Password label="Senha" placeholder="*******" />
+        <PasswordContextProvider>
+          <Input.Password label="Senha" placeholder="*******" />
+          <Input.Password label="Confirmar senha" placeholder="*******" />
+        </PasswordContextProvider>
 
         <Footer>
           <A href="/register">Realizar registro</A>
